@@ -108,6 +108,8 @@ class Generate(Resource):
                     # error_dialog.exec_()
                     # debug_signal.emit("The rate limit for API requests has been exceeded. The program will wait for some time and retry.")
                     time.sleep(RETRY_DELAY)
+
+            return "Error: All API retries failed"
         #@ DAVINCI @#
 
 api.add_resource(Generate, '/api/v1/generate')
