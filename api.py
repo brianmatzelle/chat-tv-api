@@ -113,7 +113,7 @@ from flask_restful import Resource, Api
 import openai
 import os
 
-openai.api_key = os.environ.get('OPENAI_API_KEY')
+openai.api_key = os.environ.get('OPENAI_KEY')
 
 app = Flask(__name__)
 api = Api(app)
@@ -121,7 +121,7 @@ api = Api(app)
 class Generate(Resource):
     def get(self):
         prompt = request.args.get('prompt')
-        response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=100)
+        response = openai.Completion.create(engine="text-davinci-002", prompt=prompt, max_tokens=25)
         return {'text': response.choices[0].text.strip()}
 
 api.add_resource(Generate, '/api/v1/generate')
