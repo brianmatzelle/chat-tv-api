@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 import openai
 import time
 import os
+import json
 
 openai.api_key = os.environ.get('OPENAI_KEY')
 
@@ -15,7 +16,8 @@ RETRY_DELAY = 2
 class Generate(Resource):
     def __init__(self):            
         self.model = request.args.get('model')
-        self.memory = request.args.get('memory')
+        # self.memory = request.args.get('memory')
+        self.memory = json.loads(self.memory) if isinstance(self.memory, str) else self.memory
         self.bot_name = request.args.get('bot_name')
         self.input_text = request.args.get('input_text')
         self.streamer_name = request.args.get('streamer_name')
